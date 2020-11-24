@@ -116,8 +116,8 @@ public class RookTest {
         // Assert
         assertThat(moves).doesNotContain(new Move(coords, coords.plus(1, 0)));
         assertThat(moves).doesNotContain(new Move(coords, coords.plus(0, 1)));
-        assertThat(moves2).doesNotContain(new Move(coords, coords.plus(0, -1)));
-        assertThat(moves2).doesNotContain(new Move(coords, coords.plus(-1, 0)));
+        assertThat(moves2).doesNotContain(new Move(coords2, coords.plus(0, -1)));
+        assertThat(moves2).doesNotContain(new Move(coords2, coords.plus(-1, 0)));
     }
 
     @Test

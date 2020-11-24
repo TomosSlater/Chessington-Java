@@ -59,6 +59,19 @@ public class Board {
         return true;
     }
 
+    public boolean checkEmptyBetweenDiagonal(Coordinates from, int distance, boolean direction){
+        if (direction){ //when true direction is from Top-left to Bottom-right
+            for(int i = 1; i < distance; i++){
+                if (!checkEmpty(from.plus(i, i))) return false;
+            }
+        } else { //when false, direction is from Top-right to Bottom-left
+            for(int i = 1; i < distance; i++){
+                if (!checkEmpty(from.plus(i, -i))) return false;
+            }
+        }
+        return true;
+    }
+
     public boolean checkFriendlyFire(Coordinates coords, PlayerColour friendlyColour){
         if (checkEmpty(coords)) return true;
         else if (checkColour(coords) != friendlyColour) return true;
