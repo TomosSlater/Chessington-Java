@@ -41,6 +41,14 @@ public class Board {
         return board[coords.getRow()][coords.getCol()];
     }
 
+    public boolean checkEmpty(Coordinates coords) {
+        return (get(coords) == null) ? true : false;
+    }
+
+    public PlayerColour checkColour(Coordinates coords){
+        return get(coords).getColour();
+    }
+
     public void move(Coordinates from, Coordinates to) {
         board[to.getRow()][to.getCol()] = board[from.getRow()][from.getCol()];
         board[from.getRow()][from.getCol()] = null;
