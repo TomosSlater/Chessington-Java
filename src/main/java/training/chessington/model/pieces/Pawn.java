@@ -18,15 +18,17 @@ public class Pawn extends AbstractPiece {
 
         ArrayList<Move> legalMoves = new ArrayList<>();
         if(this.getColour() == PlayerColour.WHITE){
-            if (board.get(new Coordinates(from.getRow() - 1, from.getCol())) == null)
-                legalMoves.add(new Move(from, new Coordinates(from.getRow() - 1, from.getCol())));
-            if (from.getRow() == 6) 
-                legalMoves.add(new Move(from, new Coordinates(from.getRow() - 2, from.getCol())));
+            if (from.getRow() != 0
+                && board.get(from.plus(-1, 0)) == null)
+                legalMoves.add(new Move(from, from.plus(-1, 0)));
+            if (from.getRow() == 6 && board.get(from.plus(-2, 0)) == null)
+                legalMoves.add(new Move(from, from.plus(-2, 0)));
         } else{
-            if (board.get(new Coordinates(from.getRow() + 1, from.getCol())) == null)
-                legalMoves.add(new Move(from, new Coordinates(from.getRow() + 1, from.getCol())));
-            if (from.getRow() == 1)
-                legalMoves.add(new Move(from, new Coordinates(from.getRow() + 2, from.getCol())));
+            if (from.getRow() != 7
+                && board.get(from.plus(1, 0)) == null)
+                legalMoves.add(new Move(from, from.plus(1, 0)));
+            if (from.getRow() == 1 && board.get(from.plus(2, 0)) == null)
+                legalMoves.add(new Move(from, from.plus(2, 0)));
         }
         return legalMoves;
     }
