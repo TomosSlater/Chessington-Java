@@ -59,6 +59,12 @@ public class Board {
         return true;
     }
 
+    public boolean checkFriendlyFire(Coordinates coords, PlayerColour friendlyColour){
+        if (checkEmpty(coords)) return true;
+        else if (checkColour(coords) != friendlyColour) return true;
+        return false;
+    }
+
     public PlayerColour checkColour(Coordinates coords){
         return get(coords).getColour();
     }

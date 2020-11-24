@@ -152,6 +152,47 @@ public class RookTest {
         assertThat(moves).doesNotContain(new Move(coords, coords.plus(0, 2)));
         assertThat(moves).doesNotContain(new Move(coords, coords.plus(-2, 0)));
         assertThat(moves).doesNotContain(new Move(coords, coords.plus(0, -2)));
+    }
 
+    @Test
+    public void rookCanTakeEnemyPieces() {
+        // Arrange
+        Board board = Board.empty();
+        Piece rook = new Rook(PlayerColour.WHITE);
+        Coordinates coords = new Coordinates(4, 4);
+        board.placePiece(coords, rook);
+
+        Piece rook2 = new Rook(PlayerColour.BLACK);
+        Coordinates coords2 = new Coordinates(3, 4);
+        board.placePiece(coords2, rook2);
+
+        // Act
+        List<Move> moves = rook.getAllowedMoves(coords, board);
+        List<Move> moves2 = rook2.getAllowedMoves(coords2, board);
+
+        // Assert
+        assertThat(moves).contains(new Move(coords, coords.plus(-1, 0)));
+        assertThat(moves2).contains(new Move(coords2, coords2.plus(-1, 0)));
+    }
+
+    @Test
+    public void rookCantTakeFriendlyPieces() {
+        // Arrange
+        Board board = Board.empty();
+        Piece rook = new Rook(PlayerColour.WHITE);
+        Coordinates coords = new Coordinates(4, 4);
+        board.placePiece(coords, rook);
+
+        Piece rook2 = new Rook(PlayerColour.WHITE);
+        Coordinates coords2 = new Coordinates(4, 5);
+        board.placePiece(coords2, rook2);
+
+        // Act
+        List<Move> moves = rook.getAllowedMoves(coords, board);
+        List<Move> moves2 = rook2.getAllowedMoves(coords2, board);
+
+        // Assert
+        assertThat(moves).doesNotContain(new Move(coords, coords.plus(0, 1)));
+        assertThat(moves2).doesNotContain(new Move(coords2, coords2.plus(0, -1)));
     }
 }
