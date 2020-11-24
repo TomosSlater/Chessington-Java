@@ -45,6 +45,20 @@ public class Board {
         return (get(coords) == null) ? true : false;
     }
 
+    public boolean checkEmptyBetween(Coordinates from, int distance, boolean direction){
+        if (direction){ //when true, direction is horizontal
+            for (int i = 1; i < distance; i++){
+                if (!checkEmpty(from.plus(0, i))) return false;
+            }
+        } else {
+            for (int i = 1; i < distance; i++){
+                if (!checkEmpty(from.plus(i, 0))) return false;
+            }
+        }
+
+        return true;
+    }
+
     public PlayerColour checkColour(Coordinates coords){
         return get(coords).getColour();
     }

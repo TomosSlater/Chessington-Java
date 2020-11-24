@@ -17,16 +17,25 @@ public class Rook extends AbstractPiece {
     public List<Move> getAllowedMoves(Coordinates from, Board board) {
         ArrayList<Move> legalMoves = new ArrayList<>();
         Coordinates to;
+        int distance;
+        Coordinates min;
 
         for (int i = 0; i < 8; i++){
-            if (i != from.getRow()){
-                to = from.plus(i - from.getRow(),0);
-                legalMoves.add(new Move(from, to));
+
+            distance = i - from.getRow();
+            to = from.plus(distance,0);
+            if (distance != 0){
+                min = (from.getRow() < to.getRow()) ? from : to;
+                if (board.checkEmptyBetween(min, Math.abs(distance), false))
+                    legalMoves.add(new Move(from, to));
             }
 
-            if (i != from.getCol()){
-                to = from.plus(0,i - from.getCol());
-                legalMoves.add(new Move(from, to));
+            distance = i - from.getCol();
+            to = from.plus(0, distance);
+            if (distance != 0){
+                min = (from.getCol() < to.getCol()) ? from : to;
+                if (board.checkEmptyBetween(min, Math.abs(distance), true))
+                    legalMoves.add(new Move(from, to));
             }
         }
 
